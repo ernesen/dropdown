@@ -83,19 +83,19 @@ pipeline {
             description: 'do you want to build API Checkov?'
         )
     }
-    // stages {
+    stages {
         stage('Clone repository') {
-            // steps {
+            steps {
                 /* Let's make sure we have the repository cloned to our workspace */
                 checkout scm
-            // }
+            }
         }
         stage('Example') {
-            // steps {
-                echo "Choice: ${params.CHOICE}"
-                sh "echo Choice: ${params.CHOICE}"
-                sh 'echo Choice: $CHOICE'
-            // }
+            steps {
+                echo "Choice: ${params.ENV}"
+                sh "echo Choice: ${params.ENV}"
+                sh 'echo Choice: $ENV'
+            }
         }
-    // }
+    }
 }
