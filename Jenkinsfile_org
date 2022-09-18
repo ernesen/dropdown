@@ -1,0 +1,36 @@
+// https://cloudaffaire.com/jenkins-pipeline-part-6-parameters/
+// https://plugins.jenkins.io/uno-choice/
+// https://www.way2automation.com/parameterize-jenkins-pipeline-jobs-part-2/
+// https://plugins.jenkins.io/uno-choice/ ****
+
+// ## ---------------------
+// ## parameters | password
+// ## ---------------------
+// 
+pipeline {
+    agent any
+    parameters {
+        // string(name: 'ENVIRONMENT', defaultValue: 'development', description: 'set env to dev')
+        password(name: 'PASSWORD', defaultValue: '', description: 'Enter a password for production environment only')
+        choice(name: 'ENV', choices: ['prd', 'dev', 'stg'], description: 'select your build env')
+        booleanParam(name: 'Docker', defaultValue: true, description: 'do you want to build Docker?')
+        booleanParam(name: 'OpenShift', defaultValue: false, description: 'do you want to build OpenShift?')
+        booleanParam(name: 'EKS', defaultValue: true, description: 'do you want to build EKS?')
+        booleanParam(name: 'API_Scan', defaultValue: false, description: 'do you want to build API Scan?')
+        booleanParam(name: 'API_Checkov', defaultValue: false, description: 'do you want to build API Checkov?')
+        // text(name: 'ENVIRONMENT_T', defaultValue: '', description: 'pass env')
+
+    }
+    stages {
+        stage('parameter_password') {
+            steps {
+                // echo "params.PASSWORD       = ${params.PASSWORD}"
+                echo "params.ENV            = ${params.ENV}"
+                // echo "params.BUILD          = ${params.BUILD}"
+                // echo "params.ENVIRONMENT    = ${params.ENVIRONMENT}"
+                // echo "params.ENVIRONMENT_T  = ${params.ENVIRONMENT_T}"
+            }
+        }
+    }
+}
+
