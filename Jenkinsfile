@@ -1,3 +1,6 @@
+// Jenkins - Dynamic Parametrization | Multi-Option Parameters | Active - Reactive Parameters
+// https://www.youtube.com/watch?v=bYi4IXep2mk
+
 
 
 // properties([
@@ -43,15 +46,17 @@
 //     }
 //   }
 // }
-
+def value = true
 pipeline {
     agent any
     parameters {
-        password(
-            name: 'PASSWORD', 
-            defaultValue: '', 
-            description: 'Enter a password for production environment only'
-        )
+        if (value){
+            password(
+                name: 'PASSWORD', 
+                defaultValue: '', 
+                description: 'Enter a password for production environment only'
+            )
+        }
         choice(
             name: 'ENV', 
             choices: ['dev', 'stg', 'prd'], 
