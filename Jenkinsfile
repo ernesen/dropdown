@@ -47,25 +47,55 @@
 pipeline {
     agent any
     parameters {
+        password(
+            name: 'PASSWORD', 
+            defaultValue: '', 
+            description: 'Enter a password for production environment only'
+        )
         choice(
-            name: 'CHOICE',
-            choices: ['one', 'two', 'three'],
-            description: ''
+            name: 'ENV', 
+            choices: ['dev', 'stg', 'prd'], 
+            description: 'select your build env'
+        )
+        booleanParam(
+            name: 'Docker', 
+            defaultValue: true, 
+            description: 'do you want to build Docker?'
+        )
+        booleanParam(
+            name: 'OpenShift', 
+            defaultValue: false, 
+            description: 'do you want to build OpenShift?'
+        )
+        booleanParam(
+            name: 'EKS', 
+            defaultValue: true, 
+            description: 'do you want to build EKS?'
+        )
+        booleanParam(
+            name: 'API_Scan', 
+            defaultValue: false, 
+            description: 'do you want to build API Scan?'
+        )
+        booleanParam(
+            name: 'API_Checkov', 
+            defaultValue: false, 
+            description: 'do you want to build API Checkov?'
         )
     }
-    stages {
+    // stages {
         stage('Clone repository') {
-            steps {
+            // steps {
                 /* Let's make sure we have the repository cloned to our workspace */
                 checkout scm
-            }
+            // }
         }
         stage('Example') {
-            steps {
+            // steps {
                 echo "Choice: ${params.CHOICE}"
                 sh "echo Choice: ${params.CHOICE}"
                 sh 'echo Choice: $CHOICE'
-            }
+            // }
         }
-    }
+    // }
 }
