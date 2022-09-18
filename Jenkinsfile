@@ -49,7 +49,7 @@
 def type = true
 pipeline {
     agent any
-    if (type){ 
+    // if (type){ 
         parameters {
             password(
                 name: 'PASSWORD', 
@@ -86,39 +86,39 @@ pipeline {
                 defaultValue: false, 
                 description: 'do you want to build API Checkov?'
             )
-    } else {
-        parameters {
-            choice(
-                name: 'ENV', 
-                choices: ['dev', 'stg', 'prd'], 
-                description: 'select your build env'
-            )
-            booleanParam(
-                name: 'Docker', 
-                defaultValue: true, 
-                description: 'do you want to build Docker?'
-            )
-            booleanParam(
-                name: 'OpenShift', 
-                defaultValue: false, 
-                description: 'do you want to build OpenShift?'
-            )
-            booleanParam(
-                name: 'EKS', 
-                defaultValue: true, 
-                description: 'do you want to build EKS?'
-            )
-            booleanParam(
-                name: 'API_Scan', 
-                defaultValue: false, 
-                description: 'do you want to build API Scan?'
-            )
-            booleanParam(
-                name: 'API_Checkov', 
-                defaultValue: false, 
-                description: 'do you want to build API Checkov?'
-            )    
-    }
+    } //else {
+    //     parameters {
+    //         choice(
+    //             name: 'ENV', 
+    //             choices: ['dev', 'stg', 'prd'], 
+    //             description: 'select your build env'
+    //         )
+    //         booleanParam(
+    //             name: 'Docker', 
+    //             defaultValue: true, 
+    //             description: 'do you want to build Docker?'
+    //         )
+    //         booleanParam(
+    //             name: 'OpenShift', 
+    //             defaultValue: false, 
+    //             description: 'do you want to build OpenShift?'
+    //         )
+    //         booleanParam(
+    //             name: 'EKS', 
+    //             defaultValue: true, 
+    //             description: 'do you want to build EKS?'
+    //         )
+    //         booleanParam(
+    //             name: 'API_Scan', 
+    //             defaultValue: false, 
+    //             description: 'do you want to build API Scan?'
+    //         )
+    //         booleanParam(
+    //             name: 'API_Checkov', 
+    //             defaultValue: false, 
+    //             description: 'do you want to build API Checkov?'
+    //         )    
+    // }
 
     stages {
         stage('Clone repository') {
